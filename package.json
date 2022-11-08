@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/DRG00/uni-shop#readme",
   "dependencies": {
-    "@escook/request-miniprogram": "^0.2.1"
+    "@escook/request-miniprogram": "^0.2.1",
+    "vant": "^2.12.51"
   }
 }

@@ -4,6 +4,9 @@ import App from './App'
 import Vue from 'vue'
 // 导入第三方网络请求包 支持axios（请求响应拦截等功能）
 import {$http} from "@escook/request-miniprogram"
+// 引入vant
+// import { Search } from 'vant';
+// Vue.use(Search)
 uni.$http = $http
 // 配置请求根路径
 $http.baseUrl = 'https://api-hmugo-web.itheima.net'

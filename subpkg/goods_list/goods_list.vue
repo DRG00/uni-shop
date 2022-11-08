@@ -1,13 +1,13 @@
 <template>
 	<view>
-	goods_list--{{query}}
+	goods_list--{{query.query}}--{{query.cid}}
 	</view>
 </template>
 
 <script>
 	export default {
 		onLoad(option) {
-			this.query=option.query
+			this.query=option
 		},
 		data() {
 			return {
