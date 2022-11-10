@@ -1,6 +1,6 @@
 <template>
 	<view>
-		goods_detail
+		goods_detail--{{id}}
 	</view>
 </template>
 
@@ -8,10 +8,11 @@
 	export default {
 		onLoad(option) {
 			console.log(option);
+			this.id=option.goods_id
 		},
 		data() {
 			return {
-				
+				id:''
 			};
 		}
 	}

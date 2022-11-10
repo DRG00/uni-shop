@@ -1,5 +1,9 @@
 <template>
 	<view>
+		<!-- 搜索 -->
+		<view class="search-box">
+			<my-search @click="tosearch"></my-search>
+		</view>
 		<!-- 轮播图 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
 			<!-- dots:显示小圆点 autoplay:自动播放  interval:间隔3s轮播一次  duration:一次轮播时间为1s circular:衔接轮播 -->
@@ -84,6 +88,11 @@
 					})
 				})
 				this.floorlist = res.message
+			},
+			tosearch(){
+				uni.navigateTo({
+					url:'/subpkg/search/search'
+				})
 			}
 		},
 		// 计算属性
@@ -101,6 +110,12 @@
 </script>
 
 <style lang="scss">
+	// 搜索
+	.search-box{
+		position: sticky;
+		top: 0;
+		z-index: 8;
+	}
 	// 轮播图
 swiper{
 	height: 330rpx;

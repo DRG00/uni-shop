@@ -1,13 +1,15 @@
 <template>
 	<view>
+		<my-search @click="tosearch"></my-search>
 	<view class="scroll-container">
-		<scroll-view scroll-y="true" class="left-scroll" :style="{height:wh+'px'}" >
-			<!-- <view class="left-item active">ssss</view> -->
+		<!-- 左边scroll一级分类 -->
+		<scroll-view scroll-y="true" class="left-scroll" :style="{height:wh +'px'}" >
 			<view v-for="(item,i) in catelist" :key="i" :class="['left-item', i===active? 'active':'']" @tap="activechange(i)">
 				{{item.cat_name}}
 			</view>
 		</scroll-view>
-		<scroll-view scroll-y="true" class="right-scroll" :style="{height:wh+'px'}" >
+		<!-- 右边2.3级分类 -->
+		<scroll-view scroll-y="true" class="right-scroll" :style="{height:wh +'px'}" >
 			<view class="right-item-list" v-for="(item,i) in cateLv2" :key="i">
 				<view class="right-item-title">
 					/ {{item.cat_name}}  /
@@ -29,21 +31,21 @@
 	export default {
 		data() {
 			return {
-				// scroll高度
-				wh:'',
-				active:0,
+				wh:'',// scroll高度
+				active:0,//左边索引
 				catelist:[],
-				cateLv2:[]
+				cateLv2:[]//右边数据
 			}
 		},
 		onLoad() {
 			let styinfo = uni.getSystemInfoSync()
-			this.wh = styinfo.windowHeight
+			this.wh = styinfo.windowHeight-50
 			this.getCatelist()
 		},
 		methods: {
 			async getCatelist() {
 				const {data:res} = await uni.$http.get('/api/public/v1/categories')
+				if(res.meta.status!==200) uni.$showMsg()
 				this.catelist = res.message
 				this.cateLv2 = res.message[0].children
 			},
@@ -54,6 +56,11 @@
 			togoodsList(item){
 				uni.navigateTo({
 					url:'/subpkg/goods_list/goods_list?cid='+item.cat_id
+				})
+			},
+			tosearch(){
+				uni.navigateTo({
+					url:'/subpkg/search/search'
 				})
 			}
 		}

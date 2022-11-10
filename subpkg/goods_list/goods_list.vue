@@ -1,6 +1,6 @@
 <template>
 	<view>
-	goods_list--{{query.query}}--{{query.cid}}
+	goods_list--{{query.goods_name}}
 	</view>
 </template>
 
