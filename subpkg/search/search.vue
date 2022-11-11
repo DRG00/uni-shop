@@ -23,7 +23,7 @@
 			</view>
 			<!-- 历史框 -->
 			<view class="history-text">
-				<span class="text-item" v-for="(item,index) in history" :key="index" @tap="gotoList(item)">
+				<span class="text-item" v-for="(item,index) in history" :key="index" @tap="gotoList(item)" >
 				{{item}}</span>
 			</view>
 		</view>
@@ -90,6 +90,7 @@
 					this.searchadvice=[]
 				} else if(t=='h'){//清除历史
 					this.searchhistory=[]
+					uni.removeStorageSync('history')
 				}
 			}
 		},

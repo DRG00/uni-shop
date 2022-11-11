@@ -8,7 +8,7 @@
 	export default {
 		onLoad(option) {
 			console.log(option);
-			this.id=option.goods_id
+			this.id=option.goodId
 		},
 		data() {
 			return {
