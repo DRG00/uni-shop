@@ -44,17 +44,19 @@
 			};
 		},
 		methods:{
-			async search(){
-				// 去重
-				  const set = new Set(this.searchhistory)// 1. 将 Array 数组转化为 Set 对象
-				  set.delete(this.keyword)// 2. 调用 Set 对象的 delete 方法，移除对应的元素
-				  set.add(this.keyword)// 3. 调用 Set 对象的 add 方法，向 Set 中添加元素
-				  this.searchhistory = Array.from(set)// 4. 将 Set 对象转化为 Array 数组
-				// 将搜索历史存到本地
-				uni.setStorageSync('history',JSON.stringify(this.searchhistory))
-				// 搜索
-				// const {data:res} = await uni.$http.get('')
-				this.gotoList(this.keyword)
+			search(){
+				if(this.keyword.trim()){
+					// 去重
+					  const set = new Set(this.searchhistory)// 1. 将 Array 数组转化为 Set 对象
+					  set.delete(this.keyword)// 2. 调用 Set 对象的 delete 方法，移除对应的元素
+					  set.add(this.keyword)// 3. 调用 Set 对象的 add 方法，向 Set 中添加元素
+					  this.searchhistory = Array.from(set)// 4. 将 Set 对象转化为 Array 数组
+					// 将搜索历史存到本地
+					uni.setStorageSync('history',JSON.stringify(this.searchhistory))
+					// 搜索
+					// const {data:res} = await uni.$http.get('')
+					this.gotoList(this.keyword)
+				}
 			},
 			// 防抖处理
 		 	async input(e){//e->输入的内容
@@ -74,7 +76,7 @@
 			// 前往商品详情
 			gotodetail(id){
 				uni.navigateTo({
-					url:'/subpkg/goods_detail/goods_detail?goods_id='+id
+					url:'/subpkg/goods_detail/goods_detail?goodId='+id
 				})
 			},
 			// 前往商品列表
