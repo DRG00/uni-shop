@@ -1,5 +1,6 @@
 import App from './App'
-
+// 导入store实例对象
+import store from '@/store/store.js'
 // #ifndef VUE3
 import Vue from 'vue'
 // 导入第三方网络请求包 支持axios（请求响应拦截等功能）
@@ -34,7 +35,9 @@ uni.$showMsg = function (title='数据加载失败',duration=1500){
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
-    ...App
+    ...App,
+	// 将store挂载到 Vue实例上
+	store,
 })
 app.$mount()
 // #endif

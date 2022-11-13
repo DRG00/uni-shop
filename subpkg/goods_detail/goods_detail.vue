@@ -72,7 +72,6 @@
 				// 使用字符串的 replace() 方法，将 webp 的后缀名替换为 jpg 的后缀名 正则 /g表示全部替换
 				result.message.goods_introduce = result.message.goods_introduce.replace(/<img/g , '<img style="display:block;" ')
 				.replace(/.webp/g , '.jpg')//适应ios 不显示webp
-				console.log(result.message);
 				this.gooddetail = result.message
 			},
 			// 点击轮播图放大预览图片
@@ -86,9 +85,9 @@
 			},
 			//左边导航按钮
 			onClick(e){
-				// console.log('click',e.content);
-				if(e.content == '购物车') {
-					uni.navigateTo({
+				if(e.content.text == '购物车') {
+					// console.log('gwc');
+					uni.switchTab({
 						url:'/pages/cart/cart'
 					})
 				}

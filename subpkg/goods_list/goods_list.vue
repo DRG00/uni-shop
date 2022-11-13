@@ -28,6 +28,7 @@
 	export default {
 		onLoad(option) {
 			this.queryObj.query=option.goods_name
+			this.queryObj.cid = option.cid
 			this.getgoodList()
 		},
 		data() {
