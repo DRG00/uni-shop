@@ -10,7 +10,7 @@
 		</swiper>
 		<!-- 商品信息 -->
 		<view class="goodinfo">
-			<view> ${{gooddetail.goods_price}} </view>
+			<view> ￥{{gooddetail.goods_price}} </view>
 			<view> {{gooddetail.goods_name}} 
 				<view class="goodlike">
 					<uni-icons type="star" size="30"></uni-icons>
@@ -31,15 +31,23 @@
 </template>
 
 <script>
+	// 从 vuex 中按需导出辅助方法
+	import { mapState, mapMutations, mapGetters } from 'vuex';
+	// import store from '@/store/store.js';
 	export default {
 		onLoad(option) {
-			console.log(option);
-			// this.id=option.goodId,
+			// console.log(option);
+			this.id=option.goodId,
 			this.getgoodDetail()
 		},
+			// ...mapState('模块的名称', ['要映射的数据名称1', '要映射的数据名称2'])
+			    computed: {
+					...mapState('cart',['cart']),//前面加模块名可直接获取state中的数据
+					...mapGetters('cart',['total'])
+				},
 		data() {
 			return {
-				id:17928,//商品id
+				id:0,//商品id
 				gooddetail:{},//商品数据
 				// 底部导航按钮
 				options:[{
@@ -49,7 +57,7 @@
 					{
 						icon:'cart',
 						text:'购物车',
-						info:3,
+						info:'',
 						infoBackgroundColor:'#c00000'
 					}],
 				btnGroup:[{
@@ -65,6 +73,8 @@
 			};
 		},
 		methods:{
+			// vuex
+			...mapMutations('cart',['ADDCART']),
 			// 获取详情页信息
 			async getgoodDetail() {
 				const { data:result } = await uni.$http.get('/api/public/v1/goods/detail',{ goods_id:this.id })
@@ -94,7 +104,37 @@
 			},
 			// 右边导航按钮
 			btnClick(e) {
-				console.log('pay',e.content);
+				// 点击加入购物车
+				if(e.content.text === '加入购物车') {
+				// 商品信息
+					const goods = {
+						goods_id: this.gooddetail.cat_id,	
+						goods_name: this.gooddetail.goods_name,	
+						goods_price: this.gooddetail.goods_price,
+						goods_count: 1, //商品的数量
+						goods_small_logo: this.gooddetail.goods_small_logo,	//商品的图片
+						goods_state: this.gooddetail.goods_state //商品的勾选状态
+					}
+					// 将商品信息存储到购物车
+					this.ADDCART(goods)
+				}
+			}
+		},
+		watch: {
+			// total(nvl) {
+			// 	let result = this.options.find( x => x.text=== '购物车')
+				// if(result) {
+				// 	result.info = nvl
+				// }
+			total:{
+				handler(nvl) {
+					let result = this.options.find( x => x.text=== '购物车')
+						if(result) {
+							result.info = nvl
+						}
+				},
+				// 首次加载立即调用
+				immediate:true
 			}
 		}
 	}

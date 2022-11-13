@@ -27,8 +27,8 @@
 <script>
 	export default {
 		onLoad(option) {
-			this.queryObj.query=option.goods_name
-			this.queryObj.cid = option.cid
+			this.queryObj.query=option.goods_name || ''
+			this.queryObj.cid = option.cid || ''
 			this.getgoodList()
 		},
 		data() {
@@ -48,6 +48,7 @@
 			};
 		},
 		methods:{
+			// 获取商品列表数据
 		 	async getgoodList(){
 				const { data: res } = await uni.$http.get('/api/public/v1/goods/search',this.queryObj)
 				if(res.meta.status!==200) uni.$showMsg()
@@ -57,7 +58,7 @@
 			},
 			// 跳转商品详情页
 			todetail(item){
-				console.log(item.goods_id);
+				// console.log(item.goods_id);
 				let id = item.goods_id
 				uni.navigateTo({
 					url:'/subpkg/goods_detail/goods_detail?goodId='+id
@@ -67,7 +68,6 @@
 		// 触底事件
 		onReachBottom(){
 		this.queryObj.pagenum+=1
-		// console.log(this.queryObj.pagenum);
 		// 计算剩余数据数量
 		let num = this.total - (this.queryObj.pagenum*10)
 		if(num <=0) {

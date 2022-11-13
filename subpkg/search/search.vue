@@ -33,7 +33,7 @@
 <script>
 	export default {
 		onLoad() {
-			this.searchhistory = JSON.parse(uni.getStorageSync("history") || [])
+			this.searchhistory = JSON.parse(uni.getStorageSync("history") || '[]')
 		},
 		data() {
 			return {

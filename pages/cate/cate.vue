@@ -28,7 +28,9 @@
 </template>
 
 <script>
+	import badge from '@/mixins/tabbar-badge.js'
 	export default {
+		mixins:[badge],
 		data() {
 			return {
 				wh:'',// scroll高度

@@ -1,6 +1,6 @@
 import App from './App'
 // 导入store实例对象
-import store from '@/store/store.js'
+import store from '@/store/index.js'
 // #ifndef VUE3
 import Vue from 'vue'
 // 导入第三方网络请求包 支持axios（请求响应拦截等功能）
@@ -11,15 +11,22 @@ import {$http} from "@escook/request-miniprogram"
 uni.$http = $http
 // 配置请求根路径
 $http.baseUrl = 'https://api-hmugo-web.itheima.net'
+// vuex
+Vue.prototype.$store = store
 // 添加请求拦截器
+// let timer = null
 $http.beforeRequest = function (option){
-	// 添加loading效果
-	uni.showLoading({
-		title:'数据加载中……',
-	})
+	// timer = setTimeout(()=>{//延迟loading效果
+		// 添加loading效果
+		uni.showLoading({
+			title:'数据加载中……',
+		})
+	// },1000)
+
 }
 // 响应拦截器
 $http.afterRequest = function (){
+	// clearTimeout(timer)
 	uni.hideLoading()
 }
 // 封装uni.showMsg()显示提示框
