@@ -14,7 +14,7 @@
 			<view> {{gooddetail.goods_name}} 
 				<view class="goodlike">
 					<uni-icons type="star" size="30"></uni-icons>
-					收藏
+					<text>收藏</text>
 				</view>
 			 </view>
 			<view>快递： 免运费</view>
@@ -36,8 +36,8 @@
 	// import store from '@/store/store.js';
 	export default {
 		onLoad(option) {
-			// console.log(option);
-			this.id=option.goodId,
+			console.log(option);
+			this.id= option.goodId || option.goods_id,
 			this.getgoodDetail()
 		},
 			// ...mapState('模块的名称', ['要映射的数据名称1', '要映射的数据名称2'])
@@ -172,7 +172,11 @@
 					font-size: 24rpx;
 					color: #c0c0c0;
 					font-weight: normal;
+					text-align: center;
 					border-left: 1px solid #c0c0c0;
+					text {
+						display: block;
+					}
 				}
 			}
 			&:nth-child(3) {

@@ -9,14 +9,14 @@
 			<!-- dots:显示小圆点 autoplay:自动播放  interval:间隔3s轮播一次  duration:一次轮播时间为1s circular:衔接轮播 -->
 			<swiper-item v-for="(item,index) in swiper" :key="index">
 				<navigator class="swiper-item" :url="`/subpkg/goods_detail/goods_detail?goods_id=${item.goods_id}`">
-					<image :src="item.image_src" mode=""></image>
+					<image :src="item.image_src"></image>
 				</navigator>
 			</swiper-item>
 		</swiper>
 		<!-- 分类导航 -->
 		<view class="nav-list">
 			<view class="nav-item" v-for="(item,index) in navlist" :key="index" @tap="tocate(item)"> 
-				<image :src="item.image_src" mode=""></image>
+				<image :src="item.image_src"></image>
 			</view>
 		</view>
 		<!-- 楼层区域 -->
@@ -63,6 +63,7 @@
 				const {data:res} = await uni.$http.get('/api/public/v1/home/swiperdata')
 				if(res.meta.status!==200) uni.$showMsg()
 				// { return uni.showToast({// title:'数据请求失败',// duration:1500,//1.5s后自动隐藏  icon:'none'})}
+				console.log(res);
 				this.swiper=res.message
 			},
 			// 导航菜单
