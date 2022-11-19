@@ -21,7 +21,7 @@
 		<scroll-view scroll-y="true" :style="{height:wh+'px'}">
 			<uni-swipe-action>
 				<block v-for="(good,index) in cart" :key="good.goods_id">
-				    <uni-swipe-action-item :right-options="options" @click="swipeaction(good)" @change="swipwchange($event,index)">
+				    <uni-swipe-action-item :right-options="options" @click="swipeaction(good)" >
 					<mycartlist :good="good" @radiochange='radiochange' @numchange='numchange'></mycartlist>
 					</uni-swipe-action-item>
 				</block>
@@ -72,12 +72,7 @@
 			},
 			// 滑动
 			swipeaction(good) {
-				console.log(good);
 				this.RemoveGood(good.goods_id)
-			},
-			swipwchange(e,i) {
-				console.log(e);
-				console.log(i);
 			}
 		},
 		components :{

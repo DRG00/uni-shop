@@ -62,11 +62,11 @@
 				})
 			},
 		},
-		watch: {
-			ischecked(nvl) {
+		// watch: {
+		// 	ischecked(nvl) {
 				
-			}
-		}
+		// 	}
+		// }
 	}
 </script>
 

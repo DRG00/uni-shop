@@ -12,7 +12,8 @@ uni.$http = $http
 // 配置请求根路径
 $http.baseUrl = 'https://api-hmugo-web.itheima.net'
 // vuex
-Vue.prototype.$store = store
+// Vue.prototype.$store = store
+uni.$store = store
 // 添加请求拦截器
 // let timer = null
 $http.beforeRequest = function (option){
@@ -22,6 +23,14 @@ $http.beforeRequest = function (option){
 			title:'数据加载中……',
 		})
 	// },1000)
+	// 判断接口是否为有权限的接口
+	if(option.url.indexOf('/my/') !== -1) {
+		// 设置请求头添加身份认证字段
+		option.header = {
+			Authorization: store.state.user.token
+		}
+	}
+	
 
 }
 // 响应拦截器

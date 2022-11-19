@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			<view class="persnoaladress">
-				收货地址:{{adstr}}
+				收货地址:{{addstr}}
 			</view>
 		</view>
 		<!-- 底部条纹背景 -->
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-	import {mapState, mapMutations} from 'vuex'
+	import {mapState, mapMutations, mapGetters} from 'vuex'
 	export default {
 		name:"my-adress",
 		data() {
@@ -30,7 +30,7 @@
 		},
 		methods: {
 			// vuexmutation存储收货地址到本地
-			...mapMutations('adress',['SaveAdress']),
+			...mapMutations('user',['SaveAdress']),
 			// 获取收货地址
 			chooseaddress() {
 				let that = this
@@ -44,13 +44,14 @@
 		},
 		computed: {
 			// vuex地址
-			...mapState('adress',['address']),
-			// 详细地址
-			adstr() {
-				let {provinceName,cityName,countyName,detailInfo} = this.address
-				if(!provinceName) return ''
-				return provinceName+cityName+countyName+detailInfo
-			}
+			...mapState('user',['address']),
+			// vuex获取详细地址
+			...mapGetters('user', ['addstr'])
+			// adstr() {
+			// 	let {provinceName,cityName,countyName,detailInfo} = this.address
+			// 	if(!provinceName) return ''
+			// 	return provinceName + cityName + countyName + detailInfo
+			// }
 		}
 	}
 </script>

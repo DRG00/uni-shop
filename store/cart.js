@@ -77,6 +77,7 @@ export default {
 			// return state.cart.filter( x => x.goods_state).reduce((all,item) => all += item.goods_count, 0 )
 			return state.cart.filter( x => x.goods_state).length
 		},
+		// 订单总价
 		allmoney(state) {
 			return state.cart.filter( x => x.goods_state)
 					.reduce((all,item) => all += item.goods_count * item.goods_price, 0).toFixed(2)//小数点后两位

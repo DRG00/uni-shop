@@ -61,15 +61,15 @@
 			// 获取轮播图数据
 			async getSwiperList() {
 				const {data:res} = await uni.$http.get('/api/public/v1/home/swiperdata')
-				if(res.meta.status!==200) uni.$showMsg()
+				if(res.meta.status!==200) return uni.$showMsg()
 				// { return uni.showToast({// title:'数据请求失败',// duration:1500,//1.5s后自动隐藏  icon:'none'})}
-				console.log(res);
+				// console.log(res);
 				this.swiper=res.message
 			},
 			// 导航菜单
 			async getNavlist() {
 				const {data:res} = await uni.$http.get('/api/public/v1/home/catitems')
-				if(res.meta.status!==200) uni.$showMsg()
+				if(res.meta.status!==200) return uni.$showMsg()
 				this.navlist = res.message
 			},
 			// 点击前往分类页面
@@ -83,7 +83,7 @@
 			// 楼层数据
 			async getFloordata() {
 				const {data:res} = await uni.$http.get('/api/public/v1/home/floordata')
-				if(res.meta.status!==200) uni.$showMsg()
+				if(res.meta.status!==200) return uni.$showMsg()
 				// 处理url
 				res.message.forEach( floor => {
 					floor.product_list.forEach( prod => {

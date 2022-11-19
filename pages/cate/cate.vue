@@ -47,7 +47,7 @@
 		methods: {
 			async getCatelist() {
 				const {data:res} = await uni.$http.get('/api/public/v1/categories')
-				if(res.meta.status!==200) uni.$showMsg()
+				if(res.meta.status!==200) return uni.$showMsg()
 				this.catelist = res.message
 				this.cateLv2 = res.message[0].children
 			},
